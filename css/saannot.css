@@ -1,0 +1,48 @@
+/* Julkisen tuotantosuunnitelman säännöt — staff reading view. Chrome mirrors
+   tuotantosuunnitelma.css; the tables are dense on purpose (133 rows). */
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #F4F0E8; color: #18216D; min-height: 100vh; margin: 0; }
+header { background: #18216D; padding: 0 28px; display: flex; align-items: center; justify-content: space-between; height: 56px; border-bottom: 3px solid #E57FB3; }
+.logo { color: #FFF1D0; font-size: 18px; font-weight: 800; letter-spacing: -0.5px; text-decoration: none; }
+.back-btn { color: #8899BB; font-size: 13px; text-decoration: none; }
+.back-btn:hover { color: #FFF1D0; }
+main { max-width: 1800px; margin: 0 auto; padding: 28px 20px 60px; }
+h1 { font-size: 24px; font-weight: 800; margin: 0 0 4px; }
+h2 { font-size: 18px; margin: 18px 0 8px; }
+h3 { font-size: 14px; margin: 16px 0 6px; }
+.subtitle { color: #6B7280; font-size: 14px; margin: 0 0 16px; max-width: 900px; line-height: 1.5; }
+.muted { color: #6B7280; font-size: 12px; font-weight: 500; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; white-space: nowrap; }
+code { font-size: 12px; background: #fff; padding: 1px 4px; border-radius: 4px; }
+.ss-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 12px; }
+.ss-tabs a { padding: 8px 14px; border-radius: 8px; text-decoration: none; color: #18216D; font-weight: 600; font-size: 14px; background: #fff; border: 1px solid #E8E8EE; }
+.ss-tabs a.on { background: #18216D; color: #FFF1D0; border-color: #18216D; }
+.ss-panel { background: white; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); padding: 14px 16px; overflow-x: auto; }
+.ss-filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.ss-filters input[type=search], .ss-filters select { height: 34px; border: 1px solid #E8E8EE; border-radius: 8px; padding: 0 10px; font-size: 13px; }
+.ss-filters button { height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #E8E8EE; background: #fff; color: #18216D; font-weight: 700; cursor: pointer; }
+.ss-filters button.on { background: #18216D; color: #FFF1D0; border-color: #18216D; }
+.ss-toggle { font-size: 13px; margin-left: auto; }
+.ss-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ss-table th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; color: #6B7280; padding: 6px 8px; border-bottom: 1.5px solid #18216D; }
+.ss-table td { padding: 7px 8px; border-bottom: 1px solid #E8E8EE; vertical-align: top; line-height: 1.4; }
+.ss-table.small td { padding: 4px 8px; }
+.ss-table tr.pending td { color: #6B7280; }
+.ss-table tr.late td { color: #C62828; }
+.ss-table td.when { color: #444; font-size: 12px; max-width: 320px; }
+.ss-table td.why { color: #444; font-size: 12px; max-width: 420px; }
+.par { font-family: Georgia, serif; font-weight: 700; }
+.variant { margin-top: 4px; font-size: 12px; }
+.ss-chip { display: inline-block; padding: 1px 7px; border-radius: 999px; border: 1px solid #E8E8EE; background: #F8F8FC; font-size: 11px; font-weight: 700; margin: 2px 4px 0 0; white-space: nowrap; }
+.ss-chip.venue { background: #E57FB3; border-color: #E57FB3; color: #18216D; }
+.ss-chip.warn { background: #FFF1D0; border-color: #F0DFA8; }
+.ss-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 12px; }
+.ss-answers { margin: 0; padding-left: 18px; font-size: 13px; }
+.note { font-size: 13px; background: #FFF1D0; padding: 8px 10px; border-radius: 8px; }
+.ss-phase h3 { border-bottom: 1.5px solid #18216D; padding-bottom: 4px; }
+.ss-sim { display: grid; grid-template-columns: 320px 1fr; gap: 16px; }
+.ss-sim fieldset { border: 1px solid #E8E8EE; border-radius: 10px; padding: 10px 12px; min-width: 0; }
+.ss-sim legend { font-weight: 700; font-size: 13px; }
+.ss-sim label { display: block; font-size: 13px; margin: 4px 0; }
+.ss-sim input[type=text], .ss-sim input[type=number], .ss-sim input[type=date], .ss-sim select { height: 30px; border: 1px solid #E8E8EE; border-radius: 6px; padding: 0 8px; font-size: 13px; margin-left: 4px; max-width: 100%; }
+.ss-card { padding: 6px 0; border-bottom: 1px solid #F0F0F4; font-size: 13px; }
+@media (max-width: 900px) { .ss-cols, .ss-sim { grid-template-columns: 1fr; } }

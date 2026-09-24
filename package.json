@@ -1,0 +1,31 @@
+{
+  "name": "tuotantosuunnitelma",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:install": "playwright install --with-deps chromium",
+    "copy:generate": "node scripts/copy-master.mjs",
+    "copy:check": "node scripts/copy-master.mjs --check",
+    "fixtures:check": "node scripts/rederive-fixtures.mjs",
+    "fixtures:write": "node scripts/rederive-fixtures.mjs --write"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^29.1.1",
+    "vite": "^6.0.0",
+    "vitest": "^4.1.5"
+  }
+}

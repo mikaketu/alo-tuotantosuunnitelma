@@ -1,0 +1,3166 @@
+{
+ "version": "2.0.0",
+ "categories": [
+  "financing",
+  "security",
+  "venue",
+  "programming",
+  "logistics",
+  "communications",
+  "staffing",
+  "catering"
+ ],
+ "phases": [
+  "P1",
+  "P2",
+  "P3",
+  "P4",
+  "P5"
+ ],
+ "headcount": [
+  "h0",
+  "h1",
+  "h2",
+  "h3"
+ ],
+ "types": {
+  "keikka": {
+   "family": "music",
+   "pub": true,
+   "preset": {},
+   "services": [
+    "sound_tech",
+    "light_tech",
+    "security",
+    "ticket_sales",
+    "printing",
+    "safer_space"
+   ]
+  },
+  "klubi": {
+   "family": "music",
+   "pub": true,
+   "preset": {
+    "layout": "standing"
+   },
+   "services": [
+    "sound_tech",
+    "security",
+    "ticket_sales",
+    "safer_space"
+   ]
+  },
+  "teatteri": {
+   "family": "teatteri",
+   "pub": true,
+   "preset": {
+    "programme": [
+     "own_production"
+    ],
+    "layout": "seated"
+   },
+   "services": [
+    "sound_tech",
+    "light_tech",
+    "ticket_sales",
+    "printing",
+    "extra_furnishing"
+   ]
+  },
+  "standup": {
+   "family": "standup",
+   "pub": true,
+   "preset": {
+    "layout": "seated"
+   },
+   "services": [
+    "ticket_sales",
+    "extra_furnishing"
+   ]
+  },
+  "kulttuuri": {
+   "family": "muu",
+   "pub": true,
+   "preset": {},
+   "services": [
+    "ticket_sales"
+   ]
+  },
+  "haat": {
+   "family": "yksityis",
+   "pub": false,
+   "preset": {
+    "layout": "seated"
+   },
+   "services": [
+    "sound_tech",
+    "light_tech",
+    "security",
+    "safer_space",
+    "extra_furnishing",
+    "catering"
+   ]
+  },
+  "yksityis": {
+   "family": "yksityis",
+   "pub": false,
+   "preset": {
+    "layout": "seated"
+   },
+   "services": [
+    "sound_tech",
+    "light_tech",
+    "security",
+    "safer_space",
+    "extra_furnishing",
+    "catering"
+   ]
+  },
+  "seminaari": {
+   "family": "yritys",
+   "pub": false,
+   "preset": {
+    "layout": "seated"
+   },
+   "services": [
+    "sound_tech",
+    "security",
+    "safer_space",
+    "extra_furnishing"
+   ]
+  },
+  "yritys": {
+   "family": "yritys",
+   "pub": false,
+   "preset": {
+    "layout": "seated"
+   },
+   "services": [
+    "sound_tech",
+    "security",
+    "safer_space",
+    "extra_furnishing"
+   ]
+  }
+ },
+ "venueHandles": {
+  "alcohol": "venue_handles",
+  "tickets": "both",
+  "catering": "buffet",
+  "staffing": "paid",
+  "performances": "one",
+  "registration": "paid",
+  "layout": "seated"
+ },
+ "derived": {
+  "public": {
+   "f": "deck",
+   "eq": "public"
+  },
+  "closed": {
+   "f": "deck",
+   "eq": "closed"
+  },
+  "programme_any": {
+   "not": {
+    "f": "programme",
+    "in": [
+     "none"
+    ]
+   }
+  },
+  "programme_live": {
+   "f": "programme",
+   "in": [
+    "live"
+   ]
+  },
+  "programme_dj": {
+   "f": "programme",
+   "in": [
+    "dj"
+   ]
+  },
+  "programme_speakers": {
+   "f": "programme",
+   "in": [
+    "speakers"
+   ]
+  },
+  "programme_own": {
+   "f": "programme",
+   "in": [
+    "own_production"
+   ]
+  },
+  "programme_music": {
+   "f": "programme",
+   "in": [
+    "live",
+    "dj"
+   ]
+  },
+  "tickets_yes": {
+   "f": "tickets",
+   "in": [
+    "advance",
+    "door",
+    "both"
+   ]
+  },
+  "catering_any": {
+   "f": "catering",
+   "in": [
+    "seated_meal",
+    "buffet",
+    "snacks"
+   ]
+  },
+  "has_stage": {
+   "any": [
+    {
+     "f": "type",
+     "in": [
+      "keikka",
+      "klubi",
+      "teatteri",
+      "standup"
+     ]
+    },
+    {
+     "all": [
+      {
+       "f": "type",
+       "eq": "kulttuuri"
+      },
+      {
+       "f": "stage_slot",
+       "eq": "yes"
+      }
+     ]
+    }
+   ]
+  },
+  "need_seats": {
+   "any": [
+    {
+     "f": "layout",
+     "eq": "seated"
+    },
+    {
+     "f": "catering",
+     "eq": "seated_meal"
+    },
+    {
+     "f": "exhibitors",
+     "eq": "yes"
+    }
+   ]
+  },
+  "head_ge_200": {
+   "f": "headcount",
+   "ge": 200
+  },
+  "music_family": {
+   "any": [
+    {
+     "f": "family",
+     "eq": "music"
+    },
+    {
+     "f": "type",
+     "eq": "kulttuuri"
+    }
+   ]
+  },
+  "av_needed": {
+   "any": [
+    {
+     "f": "programme",
+     "in": [
+      "speakers"
+     ]
+    },
+    {
+     "f": "type",
+     "in": [
+      "seminaari",
+      "yritys"
+     ]
+    }
+   ]
+  },
+  "head_near_200": {
+   "f": "headcount",
+   "ge": 150
+  },
+  "seated": {
+   "any": [
+    {
+     "f": "layout",
+     "in": [
+      "seated",
+      "tables"
+     ]
+    },
+    {
+     "f": "catering",
+     "eq": "seated_meal"
+    }
+   ]
+  },
+  "seats_over_60": {
+   "all": [
+    {
+     "f": "seated",
+     "eq": true
+    },
+    {
+     "f": "headcount",
+     "ge": 61
+    }
+   ]
+  }
+ },
+ "services": [
+  "sound_tech",
+  "light_tech",
+  "security",
+  "ticket_sales",
+  "printing",
+  "safer_space",
+  "extra_furnishing",
+  "catering",
+  "tilavuokra",
+  "tilavuokra_muut",
+  "cleaning",
+  "anniskelu",
+  "telineet",
+  "merch"
+ ],
+ "v0pre": [
+  "pa",
+  "av",
+  "stage",
+  "kitchen",
+  "licence",
+  "backstage",
+  "host",
+  "tech"
+ ],
+ "statutes": {
+  "kokoontumislaki": {
+   "url": "https://www.finlex.fi/fi/laki/ajantasa/1999/19990530#P14",
+   "reviewed": "2026-09-21"
+  },
+  "pelastuslaki": {
+   "url": "https://www.finlex.fi/fi/laki/ajantasa/2011/20110379#P16",
+   "reviewed": "2026-09-21"
+  },
+  "ysl": {
+   "url": "https://www.finlex.fi/fi/laki/ajantasa/2014/20140527#P118",
+   "reviewed": "2026-09-21"
+  },
+  "alkoholilaki": {
+   "url": "https://www.finlex.fi/fi/laki/ajantasa/2017/20171102#P20",
+   "reviewed": "2026-09-21"
+  },
+  "avioliittolaki": {
+   "url": "https://www.finlex.fi/fi/laki/ajantasa/1929/19290234#P13",
+   "reviewed": "2026-09-21"
+  }
+ },
+ "venueKeys": [
+  "bare",
+  "capacity",
+  "pa",
+  "av",
+  "stage",
+  "kitchen",
+  "licence",
+  "seating",
+  "access",
+  "backstage",
+  "loadin",
+  "host",
+  "tech"
+ ],
+ "cards": [
+  {
+   "id": "venue",
+   "section": "venue",
+   "kind": "venue",
+   "asked": true
+  },
+  {
+   "id": "programme",
+   "section": "programme",
+   "kind": "multi",
+   "asked": true,
+   "options": [
+    "live",
+    "dj",
+    "speakers",
+    "own_production",
+    "none"
+   ],
+   "exclusive": [
+    "none"
+   ]
+  },
+  {
+   "id": "performances",
+   "section": "programme",
+   "kind": "perf",
+   "asked": {
+    "f": "programme_any",
+    "eq": true
+   },
+   "options": [
+    "one",
+    "several"
+   ]
+  },
+  {
+   "id": "layout",
+   "section": "setup",
+   "kind": "opt",
+   "asked": {
+    "f": "type",
+    "in": [
+     "keikka",
+     "kulttuuri"
+    ]
+   },
+   "options": [
+    "seated",
+    "standing",
+    "tables"
+   ]
+  },
+  {
+   "id": "staffing",
+   "section": "setup",
+   "kind": "multi",
+   "asked": true,
+   "optional": true,
+   "options": [
+    "friends",
+    "paid"
+   ]
+  },
+  {
+   "id": "catering",
+   "section": "setup",
+   "kind": "opt",
+   "asked": true,
+   "options": [
+    "none",
+    "seated_meal",
+    "buffet",
+    "snacks"
+   ],
+   "hideOptionsFor": {
+    "haat": [
+     "none"
+    ]
+   },
+   "up": true
+  },
+  {
+   "id": "alcohol",
+   "section": "setup",
+   "kind": "opt",
+   "asked": true,
+   "options": [
+    "none",
+    "we_bring",
+    "we_sell"
+   ],
+   "optionWhen": {
+    "we_sell": {
+     "f": "deck",
+     "eq": "public"
+    }
+   },
+   "up": true
+  },
+  {
+   "id": "ends",
+   "section": "setup",
+   "kind": "opt",
+   "asked": true,
+   "options": [
+    "before22",
+    "late22",
+    "after23"
+   ]
+  },
+  {
+   "id": "tickets",
+   "section": "audience",
+   "kind": "opt",
+   "asked": {
+    "all": [
+     {
+      "f": "deck",
+      "eq": "public"
+     },
+     {
+      "f": "type",
+      "ne": "seminaari"
+     }
+    ]
+   },
+   "options": [
+    "advance",
+    "door",
+    "both",
+    "free"
+   ],
+   "up": true
+  },
+  {
+   "id": "registration",
+   "section": "audience",
+   "kind": "opt",
+   "asked": {
+    "f": "type",
+    "eq": "seminaari"
+   },
+   "options": [
+    "paid",
+    "free"
+   ]
+  },
+  {
+   "id": "merch",
+   "section": "audience",
+   "kind": "yesno",
+   "asked": {
+    "f": "deck",
+    "eq": "public"
+   }
+  },
+  {
+   "id": "exhibitors",
+   "section": "audience",
+   "kind": "yesno",
+   "asked": {
+    "f": "type",
+    "eq": "kulttuuri"
+   }
+  },
+  {
+   "id": "stage_slot",
+   "section": "programme",
+   "kind": "yesno",
+   "asked": {
+    "f": "type",
+    "eq": "kulttuuri"
+   }
+  },
+  {
+   "id": "build_days",
+   "section": "setup",
+   "kind": "yesno",
+   "asked": {
+    "any": [
+     {
+      "f": "has_stage",
+      "eq": true
+     },
+     {
+      "f": "programme_own",
+      "eq": true
+     },
+     {
+      "f": "exhibitors",
+      "eq": "yes"
+     }
+    ]
+   }
+  },
+  {
+   "id": "rigging",
+   "section": "setup",
+   "kind": "yesno",
+   "asked": {
+    "f": "has_stage",
+    "eq": true
+   },
+   "up": true
+  },
+  {
+   "id": "outdoor",
+   "section": "setup",
+   "kind": "yesno",
+   "asked": {
+    "f": "deck",
+    "eq": "public"
+   }
+  },
+  {
+   "id": "v_bare",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "f": "venue",
+    "eq": "own"
+   },
+   "capability": "bare",
+   "applies": true
+  },
+  {
+   "id": "v_capacity",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "f": "venue",
+    "eq": "own"
+   },
+   "capability": "capacity",
+   "applies": true
+  },
+  {
+   "id": "v_pa",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "f": "programme_any",
+      "eq": true
+     }
+    ]
+   },
+   "capability": "pa",
+   "applies": {
+    "f": "programme_any",
+    "eq": true
+   },
+   "v0pre": true
+  },
+  {
+   "id": "v_av",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "f": "av_needed",
+      "eq": true
+     }
+    ]
+   },
+   "capability": "av",
+   "applies": {
+    "f": "av_needed",
+    "eq": true
+   },
+   "v0pre": true
+  },
+  {
+   "id": "v_stage",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "f": "has_stage",
+      "eq": true
+     }
+    ]
+   },
+   "capability": "stage",
+   "applies": {
+    "f": "has_stage",
+    "eq": true
+   },
+   "v0pre": true
+  },
+  {
+   "id": "v_kitchen",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "f": "catering_any",
+      "eq": true
+     }
+    ]
+   },
+   "capability": "kitchen",
+   "applies": {
+    "f": "catering_any",
+    "eq": true
+   },
+   "v0pre": true
+  },
+  {
+   "id": "v_licence",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "f": "alcohol",
+      "in": [
+       "we_bring",
+       "we_sell"
+      ]
+     }
+    ]
+   },
+   "capability": "licence",
+   "applies": {
+    "f": "alcohol",
+    "in": [
+     "we_bring",
+     "we_sell"
+    ]
+   },
+   "v0pre": true
+  },
+  {
+   "id": "v_seating",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "f": "need_seats",
+      "eq": true
+     }
+    ]
+   },
+   "capability": "seating",
+   "applies": {
+    "f": "need_seats",
+    "eq": true
+   }
+  },
+  {
+   "id": "v_access",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "f": "venue",
+    "eq": "own"
+   },
+   "capability": "access",
+   "applies": true
+  },
+  {
+   "id": "v_backstage",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "f": "programme_live",
+      "eq": true
+     }
+    ]
+   },
+   "capability": "backstage",
+   "applies": {
+    "f": "programme_live",
+    "eq": true
+   },
+   "v0pre": true
+  },
+  {
+   "id": "v_loadin",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "any": [
+       {
+        "f": "programme_any",
+        "eq": true
+       },
+       {
+        "f": "catering_any",
+        "eq": true
+       },
+       {
+        "f": "exhibitors",
+        "eq": "yes"
+       }
+      ]
+     }
+    ]
+   },
+   "capability": "loadin",
+   "applies": {
+    "any": [
+     {
+      "f": "programme_any",
+      "eq": true
+     },
+     {
+      "f": "catering_any",
+      "eq": true
+     },
+     {
+      "f": "exhibitors",
+      "eq": "yes"
+     }
+    ]
+   }
+  },
+  {
+   "id": "v_host",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "f": "venue",
+    "eq": "own"
+   },
+   "capability": "host",
+   "applies": true,
+   "v0pre": true
+  },
+  {
+   "id": "v_tech",
+   "section": "capabilities",
+   "kind": "cap",
+   "asked": {
+    "all": [
+     {
+      "f": "venue",
+      "eq": "own"
+     },
+     {
+      "f": "programme_any",
+      "eq": true
+     }
+    ]
+   },
+   "capability": "tech",
+   "applies": {
+    "f": "programme_any",
+    "eq": true
+   },
+   "v0pre": true
+  }
+ ],
+ "rows": [
+  {
+   "id": "C-01",
+   "cat": "financing",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-02",
+   "cat": "financing",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-03",
+   "cat": "financing",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-20",
+   "cat": "communications",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-21",
+   "cat": "communications",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "locked": true,
+   "variants": [
+    {
+     "key": "seminarSaveTheDate",
+     "when": {
+      "all": [
+       {
+        "f": "type",
+        "eq": "seminaari"
+       },
+       {
+        "f": "runway",
+        "ge": 181
+       }
+      ]
+     }
+    },
+    {
+     "key": "seminar",
+     "when": {
+      "f": "type",
+      "eq": "seminaari"
+     }
+    },
+    {
+     "key": "saveTheDate",
+     "when": {
+      "f": "runway",
+      "ge": 181
+     }
+    }
+   ]
+  },
+  {
+   "id": "C-22",
+   "cat": "communications",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "locked": true,
+   "variants": [
+    {
+     "key": "seminar",
+     "when": {
+      "f": "type",
+      "eq": "seminaari"
+     }
+    }
+   ]
+  },
+  {
+   "id": "C-23",
+   "cat": "communications",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-24",
+   "cat": "communications",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-30",
+   "cat": "programming",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-31",
+   "cat": "programming",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-40",
+   "cat": "logistics",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-41",
+   "cat": "logistics",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-42",
+   "cat": "logistics",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-50",
+   "cat": "staffing",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-60",
+   "cat": "security",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-61",
+   "cat": "security",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "C-62",
+   "cat": "security",
+   "deck": "closed",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "S-05",
+   "cat": "security",
+   "deck": "closed",
+   "trigger": {
+    "f": "profile",
+    "in": [
+     "security"
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "service": "security"
+  },
+  {
+   "id": "C-10",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-11",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "service": "tilavuokra"
+  },
+  {
+   "id": "C-12",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true,
+   "service": "tilavuokra"
+  },
+  {
+   "id": "C-13",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-14",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-15",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "C-16",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "P-01",
+   "cat": "financing",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "P-02",
+   "cat": "financing",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "P-03",
+   "cat": "financing",
+   "deck": "public",
+   "trigger": {
+    "f": "tickets_yes",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "ticket_sales"
+  },
+  {
+   "id": "P-04",
+   "cat": "financing",
+   "deck": "public",
+   "trigger": {
+    "f": "programme_any",
+    "eq": true
+   },
+   "deadline": {
+    "fixed": {
+     "offset": 14,
+     "kind": "contractual"
+    }
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-05",
+   "cat": "financing",
+   "deck": "public",
+   "trigger": {
+    "f": "tickets_yes",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-06",
+   "cat": "financing",
+   "deck": "public",
+   "trigger": {
+    "f": "programme_any",
+    "eq": true
+   },
+   "deadline": {
+    "fixed": {
+     "offset": -14,
+     "kind": "contractual"
+    }
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-07",
+   "cat": "financing",
+   "deck": "public",
+   "trigger": {
+    "f": "tickets_yes",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "P-10",
+   "cat": "programming",
+   "deck": "public",
+   "trigger": {
+    "f": "programme_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-11",
+   "cat": "programming",
+   "deck": "public",
+   "trigger": {
+    "f": "programme_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-12",
+   "cat": "programming",
+   "deck": "public",
+   "trigger": {
+    "f": "programme_music",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-13",
+   "cat": "programming",
+   "deck": "public",
+   "trigger": {
+    "f": "programme_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-14",
+   "cat": "programming",
+   "deck": "public",
+   "trigger": {
+    "f": "programme_music",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-20",
+   "cat": "communications",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-21",
+   "cat": "communications",
+   "deck": "public",
+   "trigger": {
+    "f": "tickets_yes",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "ticket_sales"
+  },
+  {
+   "id": "P-22",
+   "cat": "communications",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-23",
+   "cat": "communications",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-24",
+   "cat": "communications",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-30",
+   "cat": "security",
+   "deck": "public",
+   "trigger": {
+    "f": "head_near_200",
+    "eq": true
+   },
+   "deadline": {
+    "fixed": {
+     "offset": 5,
+     "kind": "statutory",
+     "statute": "kokoontumislaki"
+    }
+   },
+   "deadlineIf": [
+    {
+     "when": {
+      "all": [
+       {
+        "all": [
+         {
+          "f": "headcount",
+          "ge": 400
+         },
+         {
+          "f": "performances",
+          "eq": "several"
+         }
+        ]
+       },
+       {
+        "f": "outdoor",
+        "eq": "yes"
+       }
+      ]
+     },
+     "deadline": {
+      "phase": "P1",
+      "notice": {
+       "offset": 14,
+       "statute": "kokoontumislaki"
+      }
+     },
+     "note": "policeEarly"
+    },
+    {
+     "when": {
+      "all": [
+       {
+        "f": "headcount",
+        "ge": 400
+       },
+       {
+        "f": "performances",
+        "eq": "several"
+       }
+      ]
+     },
+     "deadline": {
+      "phase": "P1",
+      "notice": {
+       "offset": 5,
+       "statute": "kokoontumislaki"
+      }
+     },
+     "note": "policeEarly"
+    },
+    {
+     "when": {
+      "f": "outdoor",
+      "eq": "yes"
+     },
+     "deadline": {
+      "fixed": {
+       "offset": 14,
+       "kind": "statutory",
+       "statute": "kokoontumislaki"
+      }
+     },
+     "note": "policeTwoWeeks"
+    }
+   ],
+   "owner": "prepare_sign",
+   "variants": [
+    {
+     "key": "probable",
+     "when": {
+      "not": {
+       "f": "head_ge_200",
+       "eq": true
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "P-31",
+   "cat": "security",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "P-32",
+   "cat": "security",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "service": "security"
+  },
+  {
+   "id": "P-33",
+   "cat": "security",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-34",
+   "cat": "security",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-40",
+   "cat": "staffing",
+   "deck": "public",
+   "trigger": {
+    "f": "tickets_yes",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-41",
+   "cat": "staffing",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-42",
+   "cat": "staffing",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-50",
+   "cat": "logistics",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-51",
+   "cat": "logistics",
+   "deck": "public",
+   "trigger": {
+    "all": [
+     {
+      "f": "programme_music",
+      "eq": true
+     },
+     {
+      "any": [
+       {
+        "f": "programme_live",
+        "ne": true
+       },
+       {
+        "f": "music_family",
+        "ne": true
+       }
+      ]
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-52",
+   "cat": "logistics",
+   "deck": "public",
+   "trigger": {
+    "f": "tickets_yes",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine",
+   "service": "ticket_sales"
+  },
+  {
+   "id": "P-53",
+   "cat": "logistics",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "P-54",
+   "cat": "logistics",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "S-02",
+   "cat": "communications",
+   "deck": "public",
+   "trigger": {
+    "f": "profile",
+    "in": [
+     "printing"
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "service": "printing"
+  },
+  {
+   "id": "S-01",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "profile",
+      "in": [
+       "light_tech"
+      ]
+     },
+     {
+      "f": "venue.tech",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "light_tech"
+  },
+  {
+   "id": "S-03",
+   "cat": "security",
+   "deck": "both",
+   "trigger": {
+    "f": "profile",
+    "in": [
+     "safer_space"
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "service": "safer_space"
+  },
+  {
+   "id": "S-04",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "profile",
+      "in": [
+       "extra_furnishing"
+      ]
+     },
+     {
+      "f": "venue.seating",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "extra_furnishing"
+  },
+  {
+   "id": "S-07",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "service": "cleaning"
+  },
+  {
+   "id": "X-01",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "programme_live",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-02",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "any": [
+     {
+      "f": "programme_live",
+      "eq": true
+     },
+     {
+      "f": "programme_speakers",
+      "eq": true
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-03",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "any": [
+     {
+      "f": "programme_live",
+      "eq": true
+     },
+     {
+      "f": "programme_speakers",
+      "eq": true
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-04",
+   "cat": "financing",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "programme_any",
+      "eq": true
+     },
+     {
+      "f": "deck",
+      "eq": "closed"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-05",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "programme_dj",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-06",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "programme_dj_only",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-10",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "venue.pa",
+    "eq": "no"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-11",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "any": [
+     {
+      "f": "venue.pa",
+      "eq": "no"
+     },
+     {
+      "all": [
+       {
+        "f": "profile",
+        "in": [
+         "sound_tech"
+        ]
+       },
+       {
+        "f": "venue.tech",
+        "eq": "no"
+       }
+      ]
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "sound_tech"
+  },
+  {
+   "id": "X-12",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "any": [
+     {
+      "f": "venue.pa",
+      "eq": "no"
+     },
+     {
+      "f": "venue.av",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P4",
+    "phase_end": "P5"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-13",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": {
+    "any": [
+     {
+      "f": "venue.pa",
+      "eq": "no"
+     },
+     {
+      "f": "venue.av",
+      "eq": "no"
+     },
+     {
+      "f": "venue.stage",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-14",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "venue.stage",
+    "eq": "no"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-15",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "venue.av",
+    "eq": "no"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-16",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "venue.av",
+      "eq": "no"
+     },
+     {
+      "f": "venue.tech",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-20",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "catering_any",
+      "eq": true
+     },
+     {
+      "f": "venue.kitchen",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-21",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "catering_any",
+      "eq": true
+     },
+     {
+      "f": "venue.kitchen",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-22",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "catering_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "service": "catering",
+   "variants": [
+    {
+     "key": "seminar",
+     "when": {
+      "f": "type",
+      "eq": "seminaari"
+     }
+    },
+    {
+     "key": "venueKitchen",
+     "when": {
+      "f": "venue.kitchen",
+      "eq": "yes"
+     }
+    }
+   ]
+  },
+  {
+   "id": "X-23",
+   "cat": "communications",
+   "deck": "both",
+   "trigger": {
+    "f": "catering_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "service": "catering"
+  },
+  {
+   "id": "X-24",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "catering_any",
+    "eq": true
+   },
+   "deadline": {
+    "fixed": {
+     "offset": 7,
+     "kind": "contractual"
+    }
+   },
+   "owner": "mine",
+   "service": "catering"
+  },
+  {
+   "id": "X-25",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "catering_any",
+      "eq": true
+     },
+     {
+      "f": "staffing",
+      "eq": "friends"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "service": "catering"
+  },
+  {
+   "id": "X-26",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "staffing",
+    "eq": "paid"
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-30",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "alcohol",
+      "eq": "we_bring"
+     },
+     {
+      "f": "venue.licence",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-31",
+   "cat": "security",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "alcohol",
+      "eq": "we_sell"
+     },
+     {
+      "f": "venue.licence",
+      "eq": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P1",
+    "notice": {
+     "offset": 3,
+     "statute": "alkoholilaki"
+    }
+   },
+   "owner": "prepare_sign",
+   "service": "anniskelu"
+  },
+  {
+   "id": "X-32",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "f": "alcohol",
+    "eq": "we_sell"
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-33",
+   "cat": "security",
+   "deck": "both",
+   "trigger": {
+    "f": "alcohol",
+    "in": [
+     "we_sell",
+     "venue_handles"
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-34",
+   "cat": "communications",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "alcohol",
+      "eq": "none"
+     },
+     {
+      "f": "deck",
+      "eq": "public"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-40",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "venue.seating",
+      "eq": "no"
+     },
+     {
+      "f": "need_seats",
+      "eq": true
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "extra_furnishing",
+   "variants": [
+    {
+     "key": "exhibitors",
+     "when": {
+      "f": "exhibitors",
+      "eq": "yes"
+     }
+    }
+   ]
+  },
+  {
+   "id": "X-41",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "venue.seating",
+      "eq": "no"
+     },
+     {
+      "f": "need_seats",
+      "eq": true
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P4",
+    "phase_end": "P5"
+   },
+   "owner": "mine",
+   "service": "extra_furnishing"
+  },
+  {
+   "id": "X-42",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "layout",
+    "eq": "seated"
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-50",
+   "cat": "communications",
+   "deck": "both",
+   "trigger": {
+    "f": "venue.access",
+    "eq": "no"
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-51",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "f": "venue.access",
+    "eq": "no"
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-60",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "venue.backstage",
+      "eq": "no"
+     },
+     {
+      "f": "programme_live",
+      "eq": true
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-70",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "venue.loadin",
+    "eq": "no"
+   },
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-80",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "f": "venue.host",
+    "eq": "no"
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-81",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "venue.tech",
+      "eq": "no"
+     },
+     {
+      "f": "programme_any",
+      "eq": true
+     },
+     {
+      "not": {
+       "f": "profile",
+       "in": [
+        "sound_tech",
+        "light_tech"
+       ]
+      }
+     },
+     {
+      "f": "venue.pa",
+      "ne": "no"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-90",
+   "cat": "security",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "head_near_200",
+      "eq": true
+     },
+     {
+      "f": "deck",
+      "eq": "public"
+     }
+    ]
+   },
+   "deadline": {
+    "fixed": {
+     "offset": 14,
+     "kind": "statutory",
+     "statute": "pelastuslaki"
+    }
+   },
+   "owner": "prepare_sign",
+   "variants": [
+    {
+     "key": "probable",
+     "when": {
+      "not": {
+       "f": "head_ge_200",
+       "eq": true
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "X-91",
+   "cat": "security",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "bare",
+      "eq": "yes"
+     },
+     {
+      "f": "late",
+      "eq": "yes"
+     },
+     {
+      "not": {
+       "f": "type",
+       "in": [
+        "haat",
+        "yksityis"
+       ]
+      }
+     }
+    ]
+   },
+   "deadline": {
+    "fixed": {
+     "offset": 30,
+     "kind": "statutory",
+     "statute": "ysl"
+    }
+   },
+   "owner": "prepare_sign"
+  },
+  {
+   "id": "X-92",
+   "cat": "financing",
+   "deck": "both",
+   "trigger": {
+    "f": "tickets_yes",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "locked": true,
+   "service": "ticket_sales"
+  },
+  {
+   "id": "X-94",
+   "cat": "financing",
+   "deck": "both",
+   "trigger": {
+    "f": "registration",
+    "eq": "paid"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "X-95",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "f": "programme_live",
+      "eq": true
+     },
+     {
+      "f": "music_family",
+      "eq": true
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "X-96",
+   "cat": "staffing",
+   "deck": "both",
+   "trigger": {
+    "f": "performances",
+    "eq": "several"
+   },
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine",
+   "repeat": "performance_dates"
+  },
+  {
+   "id": "X-97",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "merch",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "merch"
+  },
+  {
+   "id": "X-98",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": {
+    "f": "build_days",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "tilavuokra_muut"
+  },
+  {
+   "id": "X-99",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "rigging",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "service": "telineet"
+  },
+  {
+   "id": "X-100",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "outdoor",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine"
+  },
+  {
+   "id": "H-01",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "fixed": {
+     "offset": 14,
+     "kind": "statutory",
+     "statute": "avioliittolaki",
+     "earliest_offset": 120
+    }
+   },
+   "owner": "mine",
+   "type": "haat",
+   "locked": true
+  },
+  {
+   "id": "H-02",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "type": "haat",
+   "locked": true
+  },
+  {
+   "id": "H-03",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "type": "haat",
+   "locked": true
+  },
+  {
+   "id": "H-04",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "type": "haat",
+   "locked": true
+  },
+  {
+   "id": "H-06",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "haat"
+  },
+  {
+   "id": "H-07",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "type": "haat"
+  },
+  {
+   "id": "H-08",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "haat"
+  },
+  {
+   "id": "H-09",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "haat"
+  },
+  {
+   "id": "SE-03",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine",
+   "type": "seminaari"
+  },
+  {
+   "id": "SE-04",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "type": "seminaari"
+  },
+  {
+   "id": "SE-05",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "seminaari"
+  },
+  {
+   "id": "SE-06",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine",
+   "type": "seminaari"
+  },
+  {
+   "id": "TE-02",
+   "cat": "financing",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "type": "teatteri",
+   "locked": true
+  },
+  {
+   "id": "TE-03",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3",
+    "phase_end": "P5"
+   },
+   "owner": "mine",
+   "type": "teatteri"
+  },
+  {
+   "id": "TE-04",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "teatteri"
+  },
+  {
+   "id": "TE-05",
+   "cat": "security",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "teatteri"
+  },
+  {
+   "id": "TE-07",
+   "cat": "communications",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "teatteri",
+   "service": "printing"
+  },
+  {
+   "id": "K-01",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "type": "klubi",
+   "locked": true
+  },
+  {
+   "id": "MU-10",
+   "cat": "programming",
+   "deck": "both",
+   "trigger": {
+    "f": "exhibitors",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "type": "kulttuuri",
+   "locked": true
+  },
+  {
+   "id": "MU-11",
+   "cat": "financing",
+   "deck": "both",
+   "trigger": {
+    "f": "exhibitors",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "type": "kulttuuri",
+   "locked": true
+  },
+  {
+   "id": "MU-12",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "exhibitors",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "kulttuuri"
+  },
+  {
+   "id": "MU-13",
+   "cat": "communications",
+   "deck": "both",
+   "trigger": {
+    "f": "exhibitors",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "type": "kulttuuri"
+  },
+  {
+   "id": "F-01",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": {
+    "f": "venue",
+    "eq": "none"
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "F-02",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": {
+    "f": "venue",
+    "eq": "none"
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "F-03",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": {
+    "f": "venue",
+    "eq": "none"
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "V-01",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": {
+    "f": "venue.capacity",
+    "eq": "no"
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true
+  },
+  {
+   "id": "V-00",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": {
+    "f": "venue",
+    "eq": "own"
+   },
+   "deadline": {
+    "phase": "P1"
+   },
+   "owner": "mine",
+   "locked": true,
+   "repeat": "venue_unknown"
+  },
+  {
+   "id": "SU-01",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "catering_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-02",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "catering_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-03",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "catering_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-04",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-05",
+   "cat": "financing",
+   "deck": "both",
+   "trigger": {
+    "all": [
+     {
+      "any": [
+       {
+        "f": "catering_any",
+        "eq": true
+       },
+       {
+        "f": "alcohol",
+        "in": [
+         "we_sell",
+         "we_bring"
+        ]
+       }
+      ]
+     },
+     {
+      "f": "alcohol",
+      "ne": "venue_handles"
+     }
+    ]
+   },
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-06",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-07",
+   "cat": "communications",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-08",
+   "cat": "communications",
+   "deck": "both",
+   "trigger": {
+    "f": "profile",
+    "in": [
+     "printing"
+    ]
+   },
+   "deadline": {
+    "phase": "P3"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-09",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "merch",
+    "eq": "yes"
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-10",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "programme",
+    "in": [
+     "live",
+     "speakers"
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-11",
+   "cat": "venue",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-12",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "type",
+    "eq": "seminaari"
+   },
+   "deadline": {
+    "phase": "P4"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-13",
+   "cat": "catering",
+   "deck": "both",
+   "trigger": {
+    "f": "catering_any",
+    "eq": true
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-14",
+   "cat": "communications",
+   "deck": "public",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-15",
+   "cat": "logistics",
+   "deck": "both",
+   "trigger": {
+    "f": "programme",
+    "in": [
+     "live",
+     "speakers"
+    ]
+   },
+   "deadline": {
+    "phase": "P2"
+   },
+   "owner": "mine",
+   "sustainable": true
+  },
+  {
+   "id": "SU-99",
+   "cat": "financing",
+   "deck": "both",
+   "trigger": true,
+   "deadline": {
+    "phase": "P5"
+   },
+   "owner": "mine",
+   "sustainable": true,
+   "uncounted": true
+  }
+ ],
+ "headcountBuckets": [
+  50,
+  150,
+  400
+ ]
+}
