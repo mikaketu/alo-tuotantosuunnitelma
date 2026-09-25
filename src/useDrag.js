@@ -67,7 +67,9 @@ export function useDrag({ allow, onCommit, enabled = true, key = null }) {
       if (su) su.style.opacity = String(u);
     };
     const fly = (dir, done) => {
-      const e = el(); if (!e || st.current.flying) return;
+      if (st.current.flying) return;
+      const e = el();
+      if (!e) { if (done) done(dir); return; }   // no element (SSR, unmounted): commit without the animation
       st.current.flying = true;
       const W = e.offsetWidth || 350, H = e.offsetHeight || 470;
       const x = dir === 'left' ? -W * 1.6 : dir === 'right' ? W * 1.6 : 0;

@@ -54,7 +54,7 @@ function Stamps({ card }) {
  * share them: onFly(dir) · onTap(value) · onToggle(opt) · onConfirm() ·
  * onPerf('one'|'several') · onLastDate(iso) · onPerfReset().
  */
-export default function Card({ card, facts, type, front, dragRef, capPos, eventDate, today, sel = [], several = false, h }) {
+export default function Card({ card, facts, type, front, dragRef, capPos, eventDate, today, sel = [], several = false, picked = null, h }) {
   const q = cardQuestion(card, type);
   const help = has(`card.${card.id}.help`) ? ts(`card.${card.id}.help`) : null;
   const why = front && facts ? askedBecause(card, facts) : null;
@@ -76,7 +76,7 @@ export default function Card({ card, facts, type, front, dragRef, capPos, eventD
     body = (
       <div className="opts">
         {card.options.map((o, i) => (
-          <button key={o} type="button" className="opt" onClick={() => h.onTap(o)}><span className="key" aria-hidden="true">{i + 1}</span>{ts(`card.${card.id}.opt.${o}`)}</button>
+          <button key={o} type="button" className="opt" aria-pressed={picked === o} onClick={() => h.onTap(o)}><span className="key" aria-hidden="true">{i + 1}</span>{ts(`card.${card.id}.opt.${o}`)}</button>
         ))}
       </div>
     );
@@ -108,7 +108,7 @@ export default function Card({ card, facts, type, front, dragRef, capPos, eventD
     ) : (
       <div className="opts">
         {card.options.map((o, i) => (
-          <button key={o} type="button" className="opt" onClick={() => h.onPerf(o)}><span className="key" aria-hidden="true">{i + 1}</span>{ts(`card.${card.id}.opt.${o}`)}</button>
+          <button key={o} type="button" className="opt" aria-pressed={picked === o} onClick={() => h.onPerf(o)}><span className="key" aria-hidden="true">{i + 1}</span>{ts(`card.${card.id}.opt.${o}`)}</button>
         ))}
       </div>
     );

@@ -13,6 +13,13 @@ function watch(page: Page, baseURL: string | undefined) {
   return bad;
 }
 
+// An answer shows as chosen, then the card flies off (~0.4 s): wait for the next question
+// instead of a fixed pause, so a click never lands on a card that is still flying.
+async function nextCard(page: Page, before: string) {
+  // Read without waiting: after the last card there is no front card at all.
+  await expect.poll(() => page.evaluate(() => document.querySelector('.card.front h2.q')?.textContent || ''), { timeout: 5000 }).not.toBe(before);
+}
+
 test('cover → deck → reload lands on the first unanswered card; the plan can be saved as a file', async ({ page, baseURL }) => {
   const bad = watch(page, baseURL);
   await page.goto('/');
@@ -38,6 +45,7 @@ test('cover → deck → reload lands on the first unanswered card; the plan can
   await front.getByRole('button', { name: /^Valmis/ }).click();
   await expect(front).toContainText('Yhtenä päivänä vai useampana');
   await front.getByRole('button', { name: 'Yhtenä päivänä' }).click(); // performances
+  await expect(front).not.toContainText('Yhtenä päivänä vai useampana');   // flown, answer saved
 
   await page.reload();
   await expect(front).toBeVisible();
@@ -70,18 +78,19 @@ test('a whole deck by buttons → reveal → plan with a CSV download → owners
     if (await page.getByRole('button', { name: /Näytä suunnitelma/ }).isVisible().catch(() => false)) break;
     const front = page.locator('.card.front');
     if (!(await front.isVisible().catch(() => false))) break;
-    if (await front.getByRole('button', { name: /Ei vielä/ }).isVisible().catch(() => false)) { await front.getByRole('button', { name: /Ei vielä/ }).click(); await page.waitForTimeout(300); continue; }
+    const before = await front.locator('h2.q').innerText();
+    if (await front.getByRole('button', { name: /Ei vielä/ }).isVisible().catch(() => false)) { await front.getByRole('button', { name: /Ei vielä/ }).click(); await nextCard(page, before); continue; }
     const opt = front.locator('.opt').first();
     if (await opt.isVisible().catch(() => false)) {
       await opt.click();
       const confirm = front.getByRole('button', { name: /^Valmis/ });
       if (await confirm.isVisible().catch(() => false)) await confirm.click();
-      await page.waitForTimeout(150);
+      await nextCard(page, before);
       continue;
     }
     // Swipe cards: "Kyllä →" is the primary button whether ↑ is offered (three buttons) or not (two).
     await front.locator('.actions .btn.primary').click();
-    await page.waitForTimeout(300);
+    await nextCard(page, before);
   }
   await expect(page.getByRole('button', { name: /Näytä suunnitelma/ })).toBeVisible({ timeout: 5000 });
   await page.getByRole('button', { name: /Näytä suunnitelma/ }).click();

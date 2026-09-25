@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { ts } from '../copy/ts.js';
 import * as store from '../store.js';
-import { useDrag } from '../useDrag.js';
+import { useDrag, prefersReducedMotion } from '../useDrag.js';
 import TopBar, { Wordmark } from './TopBar.jsx';
 import Progress from './Progress.jsx';
 import Card, { canUp, commitValue, isTapOnly } from './Card.jsx';
+
+const PICK_MS = 200;   // how long a tapped option shows as chosen before the card flies
 
 /** The deck: the front card is `queue[0]`, the next card peeks behind it. Every answer path goes through `commit`. */
 export default function Deck({ s, ev, keys, today }) {
@@ -31,15 +33,28 @@ export default function Deck({ s, ev, keys, today }) {
     return true;
   };
 
+  // A tapped answer shows as chosen for a moment, then the card flies off like a swipe.
+  const [picked, setPicked] = useState({ id: null, v: null });
+  const pickedV = picked.id === card.id ? picked.v : null;
+  const pickThen = (v, save) => {
+    if (pickedV !== null || drag.api.state.current.flying) return;
+    setPicked({ id: card.id, v });
+    setTimeout(() => drag.api.fly('right', save), prefersReducedMotion() ? 0 : PICK_MS);
+  };
   const h = {
     onFly: fly,
-    onTap: (o) => store.answer(card.id, o),
+    onTap: (o) => pickThen(o, () => store.answer(card.id, o)),
     onToggle: (o) => {
       if (card.exclusive && card.exclusive.includes(o)) setSel(sel.includes(o) ? [] : [o]);
       else setSel(sel.includes(o) ? sel.filter((x) => x !== o) : sel.filter((x) => !(card.exclusive || []).includes(x)).concat(o));
     },
-    onConfirm: () => { if (sel.length || card.optional) { store.answer(card.id, [...sel]); return true; } return false; },
-    onPerf: (o) => { if (o === 'several') setSeveral(true); else store.answer(card.id, 'one'); },
+    onConfirm: () => {
+      if (!sel.length && !card.optional) return false;
+      const v = [...sel];
+      drag.api.fly('right', () => store.answer(card.id, v));
+      return true;
+    },
+    onPerf: (o) => { if (o === 'several') setSeveral(true); else pickThen('one', () => store.answer(card.id, 'one')); },
     onLastDate: (iso) => { store.setLastDate(iso); store.answer(card.id, 'several'); },
     onPerfReset: () => setSeveral(false),
   };
@@ -75,7 +90,7 @@ export default function Deck({ s, ev, keys, today }) {
       <div className="stage">
         <div className="card back2" aria-hidden="true" />
         {next && <Card key={`b-${next.id}`} card={next} {...common} />}
-        <Card key={card.id} card={card} front dragRef={drag.ref} capPos={capPos} sel={sel} several={several} h={h} {...common} />
+        <Card key={card.id} card={card} front dragRef={drag.ref} capPos={capPos} sel={sel} several={several} picked={pickedV} h={h} {...common} />
       </div>
       <div className="later"><button type="button" className="btn text" onClick={() => store.defer(card.id)}>{ts('ui.deck.later')}</button></div>
       <div className="keys" aria-hidden="true">
